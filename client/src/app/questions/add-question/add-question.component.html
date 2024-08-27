@@ -1,0 +1,12 @@
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3">
+        <label for="exampleInputQ" class="form-label">Question</label>
+        <input type="text" class="form-control" formControlName="question">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputQ" class="form-label">Answer</label>
+        <textarea class="form-control" rows="3" formControlName="answer"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>

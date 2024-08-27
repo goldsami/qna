@@ -1,0 +1,15 @@
+<div class="row mb-5">
+    <div class="col-12">
+        <app-add-question (questionAdded)="fetchQuestions()"></app-add-question>
+    </div>
+</div>
+
+<hr>
+
+<div class="row mb-5">
+    <div class="col-12">
+        <div class="accordion accordion-flush">
+            <app-question *ngFor="let question of questions$ | async" [question]="question"></app-question>
+        </div>
+    </div>
+</div>

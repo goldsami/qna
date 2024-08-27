@@ -1,0 +1,16 @@
+<div (click)="toggleExpand()"></div>
+<div *ngIf="isExpanded"></div>
+<div class="accordion-item" [id]="question?.id">
+    <h2 class="accordion-header">
+        <button 
+            class="accordion-button border" 
+            [ngClass]="{'collapsed': !isExpanded}"
+            (click)="toggleExpand()"
+        >{{question?.question}}</button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" [ngClass]="{'show': isExpanded}">
+        <div class="accordion-body border">
+            {{question?.answer}}
+        </div>
+    </div>
+</div>
