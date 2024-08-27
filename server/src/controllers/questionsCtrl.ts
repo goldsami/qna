@@ -16,8 +16,6 @@ const QuestionsCtrl = {
   add: (req: Request, res: Response) => {
     if (!req.body) res.status(404).send();
 
-    console.log({body: req.body})
-
     // TODO: add body validation
     QuestionsService.addQuestion(req.body)
       .then(question => {
