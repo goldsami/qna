@@ -14,7 +14,7 @@
         <div class="accordion-body border">
             {{question?.answer}}
             <br>
-            <button type="button" class="btn btn-link">Update</button>
+            <button type="button" class="btn btn-link" (click)="lock(question.id)">Update</button>
             <button type="button" class="btn btn-link" (click)="delete(question.id)">Delete</button>
         </div>
     </div>

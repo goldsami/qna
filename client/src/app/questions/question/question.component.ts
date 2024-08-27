@@ -16,6 +16,7 @@ export class QuestionComponent implements OnDestroy {
 
   private readonly _onDestroy$ = new Subject();
   public isExpanded = false;
+  public isEdit = false;
 
   constructor(
     private readonly _questionsService: QuestionsService,
@@ -34,6 +35,18 @@ export class QuestionComponent implements OnDestroy {
     this._questionsService.deleteQuestion(id).pipe(
       takeUntil(this._onDestroy$),
       tap(() => this.questionUpdated.emit()),
-    ).subscribe();;
+    ).subscribe();
+  }
+
+  public lock(id: string) {
+    this._questionsService.lockQuestion(id).pipe(
+      takeUntil(this._onDestroy$),
+      tap((res) => {
+        if (res) this.isEdit = true;
+        else alert('Question is already modified by another user');
+      }),
+    ).subscribe();
+
+    // TODO: add update logic
   }
 }

@@ -31,13 +31,9 @@ const QuestionsCtrl = {
     const id = req.params.id as string;
 
     QuestionsService.lockQuestion(id, req.sessionID)
-      .then((locked) => {
-        if (locked) res.status(200).send();
-        else throw new Error();
-      })
+      .then((locked) => res.status(200).send(locked))
       .catch(e => {
-        console.error('failed to lock', e);
-        res.status(500).send();
+        res.status(200).send(false);
     });
   },
 
@@ -46,13 +42,9 @@ const QuestionsCtrl = {
     const id = req.params.id as string;
 
     QuestionsService.unlockQuestion(id, req.sessionID)
-      .then((unlocked) => {
-        if (unlocked) res.status(200).send();
-        else throw new Error();
-      })
+      .then((unlocked) => res.status(200).send(!!unlocked))
       .catch(e => {
-        console.error('failed to unlock', e);
-        res.status(500).send();
+        res.status(200).send(false);
     });
   },
 
@@ -61,7 +53,7 @@ const QuestionsCtrl = {
     const id = req.params.id as string;
 
     // TODO: add validation
-    QuestionsService.updateQuestion(id, req.body)
+    QuestionsService.updateQuestion(id, req.sessionID, req.body)
       .then(() => res.status(200).send())
       .catch(e => {
         console.error('failed to update question', e);
