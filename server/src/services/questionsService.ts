@@ -1,3 +1,4 @@
+import Question from "../models/Question";
 
 const DEFAULT_QUESTIONS = [{
   questions: 'What?',
@@ -10,11 +11,25 @@ const DEFAULT_QUESTIONS = [{
   answer: ''
 }];
 
-// TODO: use any storage to save the questions
 export class QuestionsService {
 
-  static async getQuestions() {
-    return Promise.resolve(DEFAULT_QUESTIONS);
+  static async getQuestions(): Promise<Question[]> {
+    return Question.query();
   }
 
+  static async addQuestion(question: Pick<Question, 'question' | 'answer'>): Promise<Question> {
+    return Question.query().insert({
+      ...question,
+    });
+  }
+
+  static async updateQuestion(id: string, question: Pick<Question, 'question' | 'answer'>): Promise<void> {
+    await Question.query().findById(id).patch({
+      ...question,
+    });
+  }
+
+  static async deleteQuestion(id: string): Promise<void> {
+    await Question.query().deleteById(id);
+  }
 }
