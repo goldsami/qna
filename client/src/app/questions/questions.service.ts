@@ -20,4 +20,8 @@ export class QuestionsService {
   addQuestion(body: Pick<Question, 'question' | 'answer'>) {
     return this._httpClient.put(this._baseUrl, body);
   }
+
+  deleteQuestion(id: string) {
+    return this._httpClient.delete(this._baseUrl + id);
+  }
 }

@@ -6,11 +6,16 @@
             class="accordion-button border" 
             [ngClass]="{'collapsed': !isExpanded}"
             (click)="toggleExpand()"
-        >{{question?.question}}</button>
+        >
+            {{question?.question}}
+        </button>
     </h2>
     <div id="collapseOne" class="accordion-collapse collapse" [ngClass]="{'show': isExpanded}">
         <div class="accordion-body border">
             {{question?.answer}}
+            <br>
+            <button type="button" class="btn btn-link">Update</button>
+            <button type="button" class="btn btn-link" (click)="delete(question.id)">Delete</button>
         </div>
     </div>
 </div>

@@ -10,10 +10,10 @@ import { Subject } from 'rxjs';
   styleUrls: ['./add-question.component.scss']
 })
 export class AddQuestionComponent implements OnInit, OnDestroy {
+  @Output() questionAdded = new EventEmitter();
+
   private readonly _onDestroy$ = new Subject();
   public form: FormGroup;
-
-  @Output() questionAdded = new EventEmitter();
 
   constructor(
     private readonly _questionsService: QuestionsService,

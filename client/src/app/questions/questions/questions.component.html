@@ -9,7 +9,11 @@
 <div class="row mb-5">
     <div class="col-12">
         <div class="accordion accordion-flush">
-            <app-question *ngFor="let question of questions$ | async" [question]="question"></app-question>
+            <app-question 
+            *ngFor="let question of questions$ | async" 
+            [question]="question"
+            (questionUpdated)="fetchQuestions()"
+        ></app-question>
         </div>
     </div>
 </div>
