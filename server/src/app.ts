@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import rateLimit from 'express-rate-limit';
 import session from 'express-session';
 import {v4 as uuidv4} from 'uuid';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -30,6 +31,8 @@ const sessionOption = session({
 const app = express();
 const port = 8080 || process.env.PORT;
 
+// TODO: add CORS configuration
+app.use(cors()); 
 app.use(bodyParser.json());
 app.use(limiter);
 app.use(sessionOption);
