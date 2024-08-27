@@ -6,6 +6,7 @@
   "rules": {
     "no-trailing-whitespace": false,
     "no-console": false,
-    "variable-name": false
+    "variable-name": false,
+    "max-classes-per-file": false
   }
 }

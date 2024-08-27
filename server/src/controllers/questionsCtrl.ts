@@ -26,6 +26,36 @@ const QuestionsCtrl = {
     });
   },
 
+  lock: (req: Request, res: Response) => {
+    if (!req.params?.id) res.status(404).send();
+    const id = req.params.id as string;
+
+    QuestionsService.lockQuestion(id, req.sessionID)
+      .then((locked) => {
+        if (locked) res.status(200).send();
+        else throw new Error();
+      })
+      .catch(e => {
+        console.error('failed to lock', e);
+        res.status(500).send();
+    });
+  },
+
+  unlock: (req: Request, res: Response) => {
+    if (!req.params?.id) res.status(404).send();
+    const id = req.params.id as string;
+
+    QuestionsService.unlockQuestion(id, req.sessionID)
+      .then((unlocked) => {
+        if (unlocked) res.status(200).send();
+        else throw new Error();
+      })
+      .catch(e => {
+        console.error('failed to unlock', e);
+        res.status(500).send();
+    });
+  },
+
   update: (req: Request, res: Response) => {
     if (!req.params?.id || !req.body) res.status(404).send();
     const id = req.params.id as string;

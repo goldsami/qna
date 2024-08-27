@@ -7,8 +7,10 @@ import { Model } from 'objection';
 import knexConfig from '../knexfile';
 import bodyParser from 'body-parser';
 import rateLimit from 'express-rate-limit';
+import session from 'express-session';
+import {v4 as uuidv4} from 'uuid';
 
-dotenv.config()
+dotenv.config();
 
 const knex = Knex((knexConfig as any).development);
 Model.knex(knex);
@@ -18,11 +20,19 @@ const limiter = rateLimit({
 	limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
 })
 
+const sessionOption = session({
+	genid() {
+		return uuidv4();
+	},
+	secret: process.env.SESSION_SECRET
+})
+
 const app = express();
 const port = 8080 || process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(limiter);
+app.use(sessionOption);
 app.use(Router);
 
 app.listen(port, () => {
